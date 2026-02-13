@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Скорая Страховая Помощь | Аварийный комиссар Владивосток</title>
+  <meta name="description" content="Аварийные комиссары во Владивостоке. Оформление ДТП, помощь с ГИБДД, страховые консультации. Круглосуточно. Приедем за 15 минут.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    :root {
+      --bg: #ffffff;
+      --text: #1a1e2b;
+      --primary: #004e9a;
+      --primary-light: #e6f0ff;
+      --card-bg: #ffffff;
+      --card-shadow: rgba(0, 78, 154, 0.08);
+      --btn-bg: #004e9a;
+      --btn-text: #ffffff;
+      --btn-hover: #003a73;
+      --section-alt: #f5f9ff;
+      --header-bg: #ffffff;
+      --header-text: #1a1e2b;
+      --border-light: #e2e8f0;
+      --icon-color: #004e9a;
+    }
+    body.dark {
+      --bg: #1e1e24;
+      --text: #f0f0f0;
+      --primary: #b22234;
+      --primary-light: #3a2a2c;
+      --card-bg: #2c2c34;
+      --card-shadow: rgba(178, 34, 52, 0.15);
+      --btn-bg: #b22234;
+      --btn-text: #ffffff;
+      --btn-hover: #8b1a1f;
+      --section-alt: #26262e;
+      --header-bg: #1e1e24;
+      --header-text: #f0f0f0;
+      --border-light: #3a3a44;
+      --icon-color: #b22234;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      transition: background 0.3s, color 0.2s;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    header {
+      background: var(--header-bg);
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+      transition: background 0.3s;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .logo span {
+      color: var(--primary);
+    }
+    .burger-btn {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: var(--text);
+      cursor: pointer;
+      padding: 8px;
+      transition: opacity 0.2s;
+      line-height: 1;
+    }
+    .burger-btn:hover { opacity: 0.7; }
+
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(3px);
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.25s, visibility 0.25s;
+      z-index: 100;
+    }
+    .menu-overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .menu-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 300px;
+      max-width: 80%;
+      height: 100%;
+      background: var(--card-bg);
+      box-shadow: -5px 0 25px rgba(0,0,0,0.15);
+      padding: 2rem 1.5rem;
+      transform: translateX(100%);
+      transition: transform 0.3s ease-out;
+      z-index: 150;
+      display: flex;
+      flex-direction: column;
+    }
+    .menu-overlay.active .menu-panel {
+      transform: translateX(0);
+    }
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .menu-logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: var(--text);
+      cursor: pointer;
+      line-height: 1;
+    }
+    .menu-nav ul {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+    .menu-nav li {
+      margin-bottom: 1.2rem;
+    }
+    .menu-nav a {
+      font-size: 1.2rem;
+      font-weight: 500;
+      display: inline-block;
+      padding: 0.3rem 0;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .menu-nav a:hover {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+    .theme-switch {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--section-alt);
+      padding: 12px 16px;
+      border-radius: 40px;
+      cursor: pointer;
+      margin-top: auto;
+      border: 1px solid var(--border-light);
+    }
+    .theme-switch i {
+      font-size: 1.4rem;
+      color: var(--primary);
+    }
+    .theme-switch span {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    section { padding: 80px 0; }
+    .section-title {
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: var(--primary);
+    }
+
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(0,78,154,0.1) 0%, rgba(0,0,0,0.5) 100%), url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+      color: white;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    body.dark .hero {
+      background: linear-gradient(135deg, rgba(178,34,52,0.2) 0%, rgba(0,0,0,0.7) 100%), url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle at 30% 30%, #ff0000 10%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(8px);
+      animation: blinkRed 1.5s infinite ease-in-out;
+      z-index: 1;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 40px;
+      right: 60px;
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle at 70% 70%, #0066ff 10%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(8px);
+      animation: blinkBlue 1.5s infinite ease-in-out;
+      z-index: 1;
+    }
+    @keyframes blinkRed {
+      0%, 100% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    @keyframes blinkBlue {
+      0%, 100% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    .hero-content {
+      max-width: 800px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 1rem;
+      animation: fadeUp 0.8s ease;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--btn-bg);
+      color: var(--btn-text);
+      padding: 14px 32px;
+      border-radius: 60px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover {
+      background: var(--btn-hover);
+      transform: scale(1.03);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+    }
+    .btn-outline:hover {
+      background: white;
+      color: #004e9a;
+    }
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .card {
+      background: var(--card-bg);
+      padding: 30px 20px;
+      border-radius: 24px;
+      box-shadow: 0 10px 25px var(--card-shadow);
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 30px var(--card-shadow);
+    }
+    .card i {
+      font-size: 3rem;
+      color: var(--icon-color);
+      margin-bottom: 20px;
+    }
+    .card h3 { font-size: 1.5rem; margin-bottom: 12px; }
+    .card p { color: var(--text); opacity: 0.8; }
+
+    .adv-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+    .adv-item {
+      background: var(--primary-light);
+      padding: 25px 15px;
+      border-radius: 30px;
+      text-align: center;
+    }
+    .adv-item i { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
+    .adv-item h4 { font-size: 1.4rem; margin-bottom: 8px; }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .trust-item {
+      background: var(--card-bg);
+      border-radius: 30px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 8px 20px var(--card-shadow);
+    }
+    .trust-item .number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+    .trust-item p { font-size: 1.1rem; }
+
+    .steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .step {
+      flex: 1 1 180px;
+      text-align: center;
+      position: relative;
+    }
+    .step-circle {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 0 auto 20px;
+      box-shadow: 0 10px 15px var(--card-shadow);
+    }
+    .step p { font-weight: 500; }
+
+    .contacts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin: 40px 0 30px;
+    }
+    .contact-card {
+      background: var(--card-bg);
+      padding: 25px;
+      border-radius: 30px;
+      box-shadow: 0 5px 15px var(--card-shadow);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      transition: 0.2s;
+    }
+    .contact-card:hover { transform: translateY(-3px); }
+    .contact-card i {
+      font-size: 2rem;
+      color: var(--primary);
+      min-width: 40px;
+    }
+    .contact-card a, .contact-card span {
+      font-size: 1.1rem;
+      word-break: break-word;
+    }
+    .map {
+      height: 250px;
+      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1569336415962-a4bd9f69c07b?q=80&w=1000&auto=format') center/cover;
+      border-radius: 30px;
+      margin-top: 30px;
+    }
+
+    footer {
+      background: var(--header-bg);
+      padding: 40px 0 20px;
+      border-top: 1px solid var(--border-light);
+    }
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 20px;
+    }
+    .socials a {
+      color: var(--primary);
+      font-size: 2rem;
+      transition: transform 0.2s;
+    }
+    .socials a:hover { transform: scale(1.2); }
+    .copy { text-align: center; opacity: 0.8; }
+
+    @media (max-width: 768px) {
+      section { padding: 60px 0; }
+      .hero h1 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <div class="logo">Скорая<span> Страховая Помощь</span></div>
+      <button class="burger-btn" id="openMenuBtn"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+
+  <div class="menu-overlay" id="menuOverlay">
+    <div class="menu-panel">
+      <div class="menu-header">
+        <span class="menu-logo">Скорая Страховая Помощь</span>
+        <button class="close-btn" id="closeMenuBtn"><i class="fas fa-times"></i></button>
+      </div>
+      <nav class="menu-nav">
+        <ul>
+          <li><a href="#home">Главная</a></li>
+          <li><a href="#services">Услуги</a></li>
+          <li><a href="#why">Преимущества</a></li>
+          <li><a href="#trust">Доверие</a></li>
+          <li><a href="#how">Как работаем</a></li>
+          <li><a href="#contacts">Контакты</a></li>
+        </ul>
+      </nav>
+      <div class="theme-switch" id="themeToggle">
+        <i class="fas fa-sun" id="themeIcon"></i>
+        <span id="themeLabel">Светлая тема</span>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container hero-content">
+        <h1>«Скорая Страховая Помощь» — аварийные комиссары во Владивостоке</h1>
+        <p>Быстро, профессионально, надёжно! Приедем за 15 минут. Работаем круглосуточно.</p>
+        <div class="hero-buttons">
+          <a href="tel:+79673888889" class="btn"><i class="fas fa-phone-alt"></i> +7 967 388‑88‑89</a>
+          <a href="#" class="btn btn-outline messenger-link"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          <a href="#" class="btn btn-outline messenger-link"><i class="fab fa-telegram-plane"></i> Telegram</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <h2 class="section-title">Что мы делаем</h2>
+        <div class="grid-3">
+          <div class="card"><i class="fas fa-file-signature"></i><h3>Оформляем ДТП</h3><p>Помощь в документах, европротокол, фотофиксация.</p></div>
+          <div class="card"><i class="fas fa-user-shield"></i><h3>Взаимодействуем с ГИБДД</h3><p>Представляем ваши интересы, ускоряем процесс.</p></div>
+          <div class="card"><i class="fas fa-camera-retro"></i><h3>Фиксируем повреждения</h3><p>Детальная фотосъёмка, акты, схемы для страховой.</p></div>
+          <div class="card"><i class="fas fa-scale-balanced"></i><h3>Консультируем по страховке</h3><p>Помощь в получении выплат, споры со страховой.</p></div>
+          <div class="card"><i class="fas fa-hand-holding-heart"></i><h3>Сопровождаем до конца</h3><p>Поддержка на всех этапах, защита прав.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="why" style="background: var(--section-alt);">
+      <div class="container">
+        <h2 class="section-title">Почему выбирают нас</h2>
+        <div class="adv-list">
+          <div class="adv-item"><i class="fas fa-clock"></i><h4>15 минут</h4><p>Прибываем за 15 минут</p></div>
+          <div class="adv-item"><i class="fas fa-medal"></i><h4>Опытные</h4><p>Комиссары со стажем</p></div>
+          <div class="adv-item"><i class="fas fa-gavel"></i><h4>По закону</h4><p>Работа строго по правилам</p></div>
+          <div class="adv-item"><i class="fas fa-moon"></i><h4>Круглосуточно</h4><p>Всегда на связи</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="trust">
+      <div class="container">
+        <h2 class="section-title">Нам доверяют</h2>
+        <div class="trust-grid">
+          <div class="trust-item"><div class="number">10+</div><p>лет безупречной работы</p></div>
+          <div class="trust-item"><div class="number">500+</div><p>оформленных ДТП</p></div>
+          <div class="trust-item"><div class="number">20+</div><p>страховых компаний</p></div>
+          <div class="trust-item"><div class="number">100%</div><p>конфиденциальность</p></div>
+        </div>
+        <p style="text-align: center; max-width: 800px; margin: 40px auto 0;">Мы знаем тонкости оформления ДТП, защищаем ваши права и ускоряем выплаты. Работаем со всеми страховыми компаниями.</p>
+      </div>
+    </section>
+
+    <section id="how" style="background: var(--section-alt);">
+      <div class="container">
+        <h2 class="section-title">Как мы работаем</h2>
+        <div class="steps">
+          <div class="step"><div class="step-circle">1</div><p>Звоните: +7 967 388‑88‑89</p></div>
+          <div class="step"><div class="step-circle">2</div><p>Мы выезжаем</p></div>
+          <div class="step"><div class="step-circle">3</div><p>Оцениваем и оформляем</p></div>
+          <div class="step"><div class="step-circle">4</div><p>Даём рекомендации</p></div>
+          <div class="step"><div class="step-circle">5</div><p>Сопровождаем до конца</p></div>
+        </div>
+        <p style="text-align: center; margin-top: 30px; font-size: 1.2rem;"><i class="fas fa-clock" style="color: var(--primary);"></i> Работаем круглосуточно, без выходных.</p>
+      </div>
+    </section>
+
+    <section id="contacts">
+      <div class="container">
+        <h2 class="section-title">Свяжитесь с нами</h2>
+        <div class="contacts-grid">
+          <div class="contact-card"><i class="fas fa-phone-alt"></i><a href="tel:+79673888889">+7 967 388‑88‑89</a></div>
+          <div class="contact-card"><i class="fas fa-envelope"></i><span>это макет, нету</span></div>
+          <div class="contact-card"><i class="fab fa-whatsapp"></i><a href="#" class="messenger-link">WhatsApp</a></div>
+          <div class="contact-card"><i class="fab fa-telegram-plane"></i><a href="#" class="messenger-link">Telegram</a></div>
+        </div>
+        <p style="text-align: center; margin-top: 30px;">Мы всегда на страже ваших интересов!</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="socials">
+        <a href="#" class="messenger-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="messenger-link" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+        <a href="#" class="messenger-link" aria-label="Viber"><i class="fab fa-viber"></i></a>
+      </div>
+      <p class="copy">© 2026 Скорая Страховая Помощь — Аварийный комиссар Владивосток</p>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const overlay = document.getElementById('menuOverlay');
+      const openBtn = document.getElementById('openMenuBtn');
+      const closeBtn = document.getElementById('closeMenuBtn');
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = document.getElementById('themeIcon');
+      const themeLabel = document.getElementById('themeLabel');
+      const body = document.body;
+      const menuLinks = document.querySelectorAll('.menu-nav a');
+
+      function openMenu() { overlay.classList.add('active'); }
+      function closeMenu() { overlay.classList.remove('active'); }
+
+      openBtn.addEventListener('click', openMenu);
+      closeBtn.addEventListener('click', closeMenu);
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeMenu();
+      });
+      menuLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      if (savedTheme === 'dark') {
+        body.classList.add('dark');
+        themeIcon.className = 'fas fa-moon';
+        themeLabel.innerText = 'Тёмная тема';
+      } else {
+        themeIcon.className = 'fas fa-sun';
+        themeLabel.innerText = 'Светлая тема';
+      }
+
+      themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark');
+        const isDark = body.classList.contains('dark');
+        themeIcon.className = isDark ? 'fas fa-moon' : 'fas fa-sun';
+        themeLabel.innerText = isDark ? 'Тёмная тема' : 'Светлая тема';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+
+      document.querySelectorAll('.messenger-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          alert('Это макет');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
