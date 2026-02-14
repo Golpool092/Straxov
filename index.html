@@ -52,7 +52,6 @@
       line-height: 1.5;
       transition: background 0.3s, color 0.2s;
     }
-    img { max-width: 100%; height: auto; display: block; }
     a { text-decoration: none; color: inherit; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
@@ -74,9 +73,11 @@
       font-size: 1.6rem;
       font-weight: 700;
       line-height: 1.2;
+      color: var(--text);
+      white-space: nowrap;
     }
-    .logo span {
-      color: var(--primary);
+    @media (max-width: 480px) {
+      .logo { font-size: 1.2rem; }
     }
     .burger-btn {
       background: none;
@@ -195,14 +196,14 @@
       min-height: 85vh;
       display: flex;
       align-items: center;
-      background: linear-gradient(135deg, rgba(0,78,154,0.1) 0%, rgba(0,0,0,0.5) 100%), url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+      background: linear-gradient(135deg, var(--primary) 0%, #001f3f 100%);
       color: white;
       text-shadow: 0 2px 5px rgba(0,0,0,0.3);
       position: relative;
       overflow: hidden;
     }
     body.dark .hero {
-      background: linear-gradient(135deg, rgba(178,34,52,0.2) 0%, rgba(0,0,0,0.7) 100%), url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+      background: linear-gradient(135deg, #b22234 0%, #4a0000 100%);
     }
     .hero::before {
       content: '';
@@ -398,21 +399,19 @@
       gap: 20px;
       transition: 0.2s;
     }
+    a.contact-card {
+      text-decoration: none;
+      color: inherit;
+    }
     .contact-card:hover { transform: translateY(-3px); }
     .contact-card i {
       font-size: 2rem;
       color: var(--primary);
       min-width: 40px;
     }
-    .contact-card a, .contact-card span {
+    .contact-card span, .contact-card a {
       font-size: 1.1rem;
       word-break: break-word;
-    }
-    .map {
-      height: 250px;
-      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1569336415962-a4bd9f69c07b?q=80&w=1000&auto=format') center/cover;
-      border-radius: 30px;
-      margin-top: 30px;
     }
 
     footer {
@@ -443,7 +442,7 @@
 <body>
   <header>
     <div class="container header-inner">
-      <div class="logo">Скорая<span> Страховая Помощь</span></div>
+      <div class="logo">Скорая Страховая</div>
       <button class="burger-btn" id="openMenuBtn"><i class="fas fa-bars"></i></button>
     </div>
   </header>
@@ -451,7 +450,7 @@
   <div class="menu-overlay" id="menuOverlay">
     <div class="menu-panel">
       <div class="menu-header">
-        <span class="menu-logo">Скорая Страховая Помощь</span>
+        <span class="menu-logo">Скорая Страховая</span>
         <button class="close-btn" id="closeMenuBtn"><i class="fas fa-times"></i></button>
       </div>
       <nav class="menu-nav">
@@ -474,7 +473,7 @@
   <main>
     <section id="home" class="hero">
       <div class="container hero-content">
-        <h1>«Скорая Страховая Помощь» — аварийные комиссары во Владивостоке</h1>
+        <h1>Аварийные комиссары — Скорая Страховая Помощь во Владивостоке</h1>
         <p>Быстро, профессионально, надёжно! Приедем за 15 минут. Работаем круглосуточно.</p>
         <div class="hero-buttons">
           <a href="tel:+79673888889" class="btn"><i class="fas fa-phone-alt"></i> +7 967 388‑88‑89</a>
@@ -540,10 +539,22 @@
       <div class="container">
         <h2 class="section-title">Свяжитесь с нами</h2>
         <div class="contacts-grid">
-          <div class="contact-card"><i class="fas fa-phone-alt"></i><a href="tel:+79673888889">+7 967 388‑88‑89</a></div>
-          <div class="contact-card"><i class="fas fa-envelope"></i><span>это макет, нету</span></div>
-          <div class="contact-card"><i class="fab fa-whatsapp"></i><a href="#" class="messenger-link">WhatsApp</a></div>
-          <div class="contact-card"><i class="fab fa-telegram-plane"></i><a href="#" class="messenger-link">Telegram</a></div>
+          <a href="tel:+79673888889" class="contact-card">
+            <i class="fas fa-phone-alt"></i>
+            <span>+7 967 388‑88‑89</span>
+          </a>
+          <div class="contact-card">
+            <i class="fas fa-envelope"></i>
+            <span>это макет, нету</span>
+          </div>
+          <a href="#" class="contact-card messenger-link">
+            <i class="fab fa-whatsapp"></i>
+            <span>WhatsApp</span>
+          </a>
+          <a href="#" class="contact-card messenger-link">
+            <i class="fab fa-telegram-plane"></i>
+            <span>Telegram</span>
+          </a>
         </div>
         <p style="text-align: center; margin-top: 30px;">Мы всегда на страже ваших интересов!</p>
       </div>
