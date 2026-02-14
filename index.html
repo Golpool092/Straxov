@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Скорая Страховая Помощь | Аварийный комиссар Владивосток</title>
-  <meta name="description" content="Аварийные комиссары во Владивостоке. Оформление ДТП, помощь с ГИБДД, страховые консультации. Круглосуточно. Приедем за 15 минут.">
+  <meta name="description" content="Аварийные комиссары во Владивостоке. Оформление ДТП, помощь с ГИБДД. Круглосуточно. Приедем за 15 минут.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -76,6 +76,9 @@
       color: var(--text);
       white-space: nowrap;
     }
+    .logo .red-text {
+      color: #ff0000;
+    }
     @media (max-width: 480px) {
       .logo { font-size: 1.2rem; }
     }
@@ -136,6 +139,9 @@
     .menu-logo {
       font-size: 1.5rem;
       font-weight: 600;
+    }
+    .menu-logo .red-text {
+      color: #ff0000;
     }
     .close-btn {
       background: none;
@@ -317,71 +323,6 @@
       margin-bottom: 20px;
     }
     .card h3 { font-size: 1.5rem; margin-bottom: 12px; }
-    .card p { color: var(--text); opacity: 0.8; }
-
-    .adv-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 25px;
-      margin-top: 40px;
-    }
-    .adv-item {
-      background: var(--primary-light);
-      padding: 25px 15px;
-      border-radius: 30px;
-      text-align: center;
-    }
-    .adv-item i { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
-    .adv-item h4 { font-size: 1.4rem; margin-bottom: 8px; }
-
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-    .trust-item {
-      background: var(--card-bg);
-      border-radius: 30px;
-      padding: 30px 20px;
-      text-align: center;
-      box-shadow: 0 8px 20px var(--card-shadow);
-    }
-    .trust-item .number {
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--primary);
-      line-height: 1.2;
-    }
-    .trust-item p { font-size: 1.1rem; }
-
-    .steps {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 40px;
-    }
-    .step {
-      flex: 1 1 180px;
-      text-align: center;
-      position: relative;
-    }
-    .step-circle {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      background: var(--primary);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      font-weight: bold;
-      margin: 0 auto 20px;
-      box-shadow: 0 10px 15px var(--card-shadow);
-    }
-    .step p { font-weight: 500; }
 
     .contacts-grid {
       display: grid;
@@ -442,7 +383,7 @@
 <body>
   <header>
     <div class="container header-inner">
-      <div class="logo">Скорая Страховая</div>
+      <div class="logo">Скорая страховая <span class="red-text">при ДТП</span></div>
       <button class="burger-btn" id="openMenuBtn"><i class="fas fa-bars"></i></button>
     </div>
   </header>
@@ -450,16 +391,13 @@
   <div class="menu-overlay" id="menuOverlay">
     <div class="menu-panel">
       <div class="menu-header">
-        <span class="menu-logo">Скорая Страховая</span>
+        <span class="menu-logo">Скорая страховая <span class="red-text">при ДТП</span></span>
         <button class="close-btn" id="closeMenuBtn"><i class="fas fa-times"></i></button>
       </div>
       <nav class="menu-nav">
         <ul>
           <li><a href="#home">Главная</a></li>
           <li><a href="#services">Услуги</a></li>
-          <li><a href="#why">Преимущества</a></li>
-          <li><a href="#trust">Доверие</a></li>
-          <li><a href="#how">Как работаем</a></li>
           <li><a href="#contacts">Контакты</a></li>
         </ul>
       </nav>
@@ -473,8 +411,8 @@
   <main>
     <section id="home" class="hero">
       <div class="container hero-content">
-        <h1>Аварийные комиссары — Скорая Страховая Помощь во Владивостоке</h1>
-        <p>Быстро, профессионально, надёжно! Приедем за 15 минут. Работаем круглосуточно.</p>
+        <h1>Служба аварийных комиссаров «Скорая страховая помощь» во Владивостоке</h1>
+        <p>Работаем круглосуточно, приедем на место ДТП за 15 минут</p>
         <div class="hero-buttons">
           <a href="tel:+79673888889" class="btn"><i class="fas fa-phone-alt"></i> +7 967 388‑88‑89</a>
           <a href="#" class="btn btn-outline messenger-link"><i class="fab fa-whatsapp"></i> WhatsApp</a>
@@ -487,51 +425,11 @@
       <div class="container">
         <h2 class="section-title">Что мы делаем</h2>
         <div class="grid-3">
-          <div class="card"><i class="fas fa-file-signature"></i><h3>Оформляем ДТП</h3><p>Помощь в документах, европротокол, фотофиксация.</p></div>
-          <div class="card"><i class="fas fa-user-shield"></i><h3>Взаимодействуем с ГИБДД</h3><p>Представляем ваши интересы, ускоряем процесс.</p></div>
-          <div class="card"><i class="fas fa-camera-retro"></i><h3>Фиксируем повреждения</h3><p>Детальная фотосъёмка, акты, схемы для страховой.</p></div>
-          <div class="card"><i class="fas fa-scale-balanced"></i><h3>Консультируем по страховке</h3><p>Помощь в получении выплат, споры со страховой.</p></div>
-          <div class="card"><i class="fas fa-hand-holding-heart"></i><h3>Сопровождаем до конца</h3><p>Поддержка на всех этапах, защита прав.</p></div>
+          <div class="card"><i class="fas fa-file-signature"></i><h3>Оформляем ДТП</h3></div>
+          <div class="card"><i class="fas fa-user-shield"></i><h3>Взаимодействуем с ГИБДД</h3></div>
+          <div class="card"><i class="fas fa-camera-retro"></i><h3>Фиксируем повреждения</h3></div>
+          <div class="card"><i class="fas fa-scale-balanced"></i><h3>Консультируем по страховке</h3></div>
         </div>
-      </div>
-    </section>
-
-    <section id="why" style="background: var(--section-alt);">
-      <div class="container">
-        <h2 class="section-title">Почему выбирают нас</h2>
-        <div class="adv-list">
-          <div class="adv-item"><i class="fas fa-clock"></i><h4>15 минут</h4><p>Прибываем за 15 минут</p></div>
-          <div class="adv-item"><i class="fas fa-medal"></i><h4>Опытные</h4><p>Комиссары со стажем</p></div>
-          <div class="adv-item"><i class="fas fa-gavel"></i><h4>По закону</h4><p>Работа строго по правилам</p></div>
-          <div class="adv-item"><i class="fas fa-moon"></i><h4>Круглосуточно</h4><p>Всегда на связи</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="trust">
-      <div class="container">
-        <h2 class="section-title">Нам доверяют</h2>
-        <div class="trust-grid">
-          <div class="trust-item"><div class="number">10+</div><p>лет безупречной работы</p></div>
-          <div class="trust-item"><div class="number">500+</div><p>оформленных ДТП</p></div>
-          <div class="trust-item"><div class="number">20+</div><p>страховых компаний</p></div>
-          <div class="trust-item"><div class="number">100%</div><p>конфиденциальность</p></div>
-        </div>
-        <p style="text-align: center; max-width: 800px; margin: 40px auto 0;">Мы знаем тонкости оформления ДТП, защищаем ваши права и ускоряем выплаты. Работаем со всеми страховыми компаниями.</p>
-      </div>
-    </section>
-
-    <section id="how" style="background: var(--section-alt);">
-      <div class="container">
-        <h2 class="section-title">Как мы работаем</h2>
-        <div class="steps">
-          <div class="step"><div class="step-circle">1</div><p>Звоните: +7 967 388‑88‑89</p></div>
-          <div class="step"><div class="step-circle">2</div><p>Мы выезжаем</p></div>
-          <div class="step"><div class="step-circle">3</div><p>Оцениваем и оформляем</p></div>
-          <div class="step"><div class="step-circle">4</div><p>Даём рекомендации</p></div>
-          <div class="step"><div class="step-circle">5</div><p>Сопровождаем до конца</p></div>
-        </div>
-        <p style="text-align: center; margin-top: 30px; font-size: 1.2rem;"><i class="fas fa-clock" style="color: var(--primary);"></i> Работаем круглосуточно, без выходных.</p>
       </div>
     </section>
 
