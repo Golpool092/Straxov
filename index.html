@@ -29,9 +29,7 @@
       --header-text: #1a1e2b;
       --border-light: #e2e8f0;
       --icon-color: #004e9a;
-      --line-start: transparent;
-      --line-mid: #004e9a;
-      --line-end: transparent;
+      --siren-opacity: 0.15;
     }
     body.dark {
       --bg: #1e1e24;
@@ -48,18 +46,30 @@
       --header-text: #f0f0f0;
       --border-light: #3a3a44;
       --icon-color: #b22234;
-      --line-start: transparent;
-      --line-mid: #b22234;
-      --line-end: transparent;
+      --siren-opacity: 0.5;
     }
     body {
       background: var(--bg);
       color: var(--text);
       line-height: 1.5;
       transition: background 0.3s, color 0.2s;
+      overflow-x: hidden;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
     a { text-decoration: none; color: inherit; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
+    }
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px;
+      }
+    }
 
     header {
       background: var(--header-bg);
@@ -78,7 +88,7 @@
     .logo {
       font-weight: 700;
       color: var(--text);
-      font-size: clamp(1.2rem, 4vw, 1.6rem);
+      font-size: clamp(1.2rem, 4vw, 1.5rem);
       line-height: 1.2;
       white-space: normal;
       word-break: break-word;
@@ -87,6 +97,16 @@
     @media (min-width: 600px) {
       .logo {
         white-space: nowrap;
+      }
+    }
+
+    .dtp-part {
+      display: inline;
+    }
+    @media (max-width: 599px) {
+      .dtp-part {
+        display: block;
+        text-align: center;
       }
     }
 
@@ -106,11 +126,11 @@
       position: absolute;
       bottom: 0;
       left: 0;
-      width: 100vw;
-      height: 3px;
-      background: linear-gradient(90deg, var(--line-start), var(--line-mid), var(--line-end));
-      background-size: 200% 100%;
-      animation: moveLine 3s infinite linear;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #ff0000, #0000ff, #ff0000, #0000ff);
+      background-size: 300% 100%;
+      animation: moveLine 4s linear infinite;
       pointer-events: none;
     }
     @keyframes moveLine {
@@ -218,6 +238,7 @@
       margin-bottom: 2rem;
       text-align: center;
       color: var(--primary);
+      word-break: break-word;
     }
 
     .hero {
@@ -249,16 +270,17 @@
       top: 0;
       width: 50%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,0,0,0.3), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,0,0,var(--siren-opacity)), transparent);
       animation: sirenMove 3s infinite linear;
+      opacity: var(--siren-opacity);
     }
     .hero .siren::before {
       left: -50%;
-      background: linear-gradient(90deg, transparent, rgba(255,0,0,0.5), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,0,0,calc(var(--siren-opacity)*1.5)), transparent);
     }
     .hero .siren::after {
       left: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0,0,255,0.5), transparent);
+      background: linear-gradient(90deg, transparent, rgba(0,0,255,calc(var(--siren-opacity)*1.5)), transparent);
       animation-delay: 1.5s;
     }
     @keyframes sirenMove {
@@ -271,35 +293,31 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,0,0,0.2) 0%, transparent 60%);
+      background: radial-gradient(circle at 30% 30%, rgba(255,0,0,var(--siren-opacity)) 0%, transparent 60%);
       animation: pulseGlow 2s infinite alternate;
+      opacity: var(--siren-opacity);
     }
     @keyframes pulseGlow {
-      0% { opacity: 0.2; }
-      100% { opacity: 0.6; }
+      0% { opacity: calc(var(--siren-opacity) * 0.5); }
+      100% { opacity: var(--siren-opacity); }
     }
     .hero-content {
       max-width: 800px;
       position: relative;
       z-index: 2;
+      width: 100%;
+      text-align: center;
+      margin: 0 auto;
     }
     .hero h1 {
-      font-size: clamp(1.8rem, 5vw, 3.5rem);
+      font-size: clamp(2rem, 6vw, 3.5rem);
       margin-bottom: 1rem;
       animation: fadeUp 0.8s ease;
+      line-height: 1.3;
     }
-    .hero h1 .nowrap {
-      display: inline-block;
-      white-space: nowrap;
-    }
-    @media (max-width: 600px) {
-      .hero h1 .nowrap {
-        display: block;
-        white-space: normal;
-      }
-      .hero h1 br {
-        display: none;
-      }
+    .hero h1 span {
+      display: block;
+      white-space: normal;
     }
     .hero p {
       font-size: 1.3rem;
@@ -311,6 +329,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 15px;
+      justify-content: center;
       animation: fadeUp 0.8s 0.2s ease both;
     }
     .btn {
@@ -326,6 +345,9 @@
       cursor: pointer;
       transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
       animation: bounce 2s infinite ease-in-out;
+      text-align: center;
+      white-space: normal;
+      word-break: break-word;
     }
     .btn:hover {
       background: var(--btn-hover);
@@ -429,12 +451,21 @@
       section { padding: 60px 0; }
       .hero h1 { font-size: 2rem; }
     }
+    @media (max-width: 480px) {
+      .btn {
+        padding: 12px 24px;
+        font-size: 0.95rem;
+      }
+      .hero-buttons {
+        gap: 10px;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="container header-inner">
-      <div class="logo">Скорая Страховая Помощь при ДТП</div>
+      <div class="logo">Скорая Страховая Помощь <span class="dtp-part">при ДТП</span></div>
       <button class="burger-btn" id="openMenuBtn"><i class="fas fa-bars"></i></button>
     </div>
     <div class="header-line"></div>
@@ -467,9 +498,9 @@
       </div>
       <div class="container hero-content">
         <h1>
-          <span class="nowrap">Служба аварийных комиссаров</span><br class="mobile-br">
-          <span class="nowrap">«Скорая страховая помощь»</span><br>
-          <span class="nowrap">во Владивостоке</span>
+          <span>Служба Аварийных Комиссаров</span>
+          <span>«Скорая Страховая Помощь»</span>
+          <span>во Владивостоке</span>
         </h1>
         <p>Работаем круглосуточно, приедем на место ДТП за 15 минут</p>
         <div class="hero-buttons">
@@ -487,7 +518,7 @@
           <div class="card"><i class="fas fa-file-signature"></i><h3>Оформляем ДТП</h3></div>
           <div class="card"><i class="fas fa-user-shield"></i><h3>Взаимодействуем с ГИБДД</h3></div>
           <div class="card"><i class="fas fa-camera-retro"></i><h3>Фиксируем повреждения</h3></div>
-          <div class="card"><i class="fas fa-scale-balanced"></i><h3>Консультируем по страховке</h3></div>
+          <div class="card"><i class="fas fa-scale-balanced"></i><h3>Оценка ущерба после ДТП</h3></div>
         </div>
       </div>
     </section>
@@ -577,4 +608,4 @@
     })();
   </script>
 </body>
-        </html>
+          </html>
