@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Скорая Страховая Помощь | Аварийный комиссар Владивосток</title>
   <meta name="description" content="Аварийные комиссары во Владивостоке. Оформление ДТП, помощь с ГИБДД. Круглосуточно. Приедем за 15 минут.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -21,14 +21,17 @@
       --primary-light: #e6f0ff;
       --card-bg: #ffffff;
       --card-shadow: rgba(0, 78, 154, 0.08);
-      --btn-bg: #004e9a;
-      --btn-text: #ffffff;
-      --btn-hover: #003a73;
+      --btn-bg: #ffaa00;
+      --btn-text: #1a1e2b;
+      --btn-hover: #ff9900;
       --section-alt: #f5f9ff;
       --header-bg: #ffffff;
       --header-text: #1a1e2b;
       --border-light: #e2e8f0;
       --icon-color: #004e9a;
+      --line-start: transparent;
+      --line-mid: #004e9a;
+      --line-end: transparent;
     }
     body.dark {
       --bg: #1e1e24;
@@ -37,14 +40,17 @@
       --primary-light: #3a2a2c;
       --card-bg: #2c2c34;
       --card-shadow: rgba(178, 34, 52, 0.15);
-      --btn-bg: #b22234;
-      --btn-text: #ffffff;
-      --btn-hover: #8b1a1f;
+      --btn-bg: #ffaa00;
+      --btn-text: #1a1e2b;
+      --btn-hover: #ff9900;
       --section-alt: #26262e;
       --header-bg: #1e1e24;
       --header-text: #f0f0f0;
       --border-light: #3a3a44;
       --icon-color: #b22234;
+      --line-start: transparent;
+      --line-mid: #b22234;
+      --line-end: transparent;
     }
     body {
       background: var(--bg);
@@ -70,18 +76,20 @@
       justify-content: space-between;
     }
     .logo {
-      font-size: 1.6rem;
       font-weight: 700;
-      line-height: 1.2;
       color: var(--text);
-      white-space: nowrap;
+      font-size: clamp(1.2rem, 4vw, 1.6rem);
+      line-height: 1.2;
+      white-space: normal;
+      word-break: break-word;
+      max-width: 80%;
     }
-    .logo .red-text {
-      color: #ff0000;
+    @media (min-width: 600px) {
+      .logo {
+        white-space: nowrap;
+      }
     }
-    @media (max-width: 480px) {
-      .logo { font-size: 1.2rem; }
-    }
+
     .burger-btn {
       background: none;
       border: none;
@@ -93,6 +101,22 @@
       line-height: 1;
     }
     .burger-btn:hover { opacity: 0.7; }
+
+    .header-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      height: 3px;
+      background: linear-gradient(90deg, var(--line-start), var(--line-mid), var(--line-end));
+      background-size: 200% 100%;
+      animation: moveLine 3s infinite linear;
+      pointer-events: none;
+    }
+    @keyframes moveLine {
+      0% { background-position: 100% 0; }
+      100% { background-position: -100% 0; }
+    }
 
     .menu-overlay {
       position: fixed;
@@ -139,9 +163,7 @@
     .menu-logo {
       font-size: 1.5rem;
       font-weight: 600;
-    }
-    .menu-logo .red-text {
-      color: #ff0000;
+      white-space: nowrap;
     }
     .close-btn {
       background: none;
@@ -211,39 +233,50 @@
     body.dark .hero {
       background: linear-gradient(135deg, #b22234 0%, #4a0000 100%);
     }
-    .hero::before {
-      content: '';
+    .hero .siren {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
-      background: radial-gradient(circle at 30% 30%, #ff0000 10%, transparent 70%);
-      border-radius: 50%;
-      filter: blur(8px);
-      animation: blinkRed 1.5s infinite ease-in-out;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
       z-index: 1;
     }
-    .hero::after {
+    .hero .siren::before,
+    .hero .siren::after {
       content: '';
       position: absolute;
-      top: 40px;
-      right: 60px;
-      width: 60px;
-      height: 60px;
-      background: radial-gradient(circle at 70% 70%, #0066ff 10%, transparent 70%);
-      border-radius: 50%;
-      filter: blur(8px);
-      animation: blinkBlue 1.5s infinite ease-in-out;
-      z-index: 1;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,0,0,0.3), transparent);
+      animation: sirenMove 3s infinite linear;
     }
-    @keyframes blinkRed {
-      0%, 100% { opacity: 0.3; transform: scale(0.8); }
-      50% { opacity: 1; transform: scale(1.2); }
+    .hero .siren::before {
+      left: -50%;
+      background: linear-gradient(90deg, transparent, rgba(255,0,0,0.5), transparent);
     }
-    @keyframes blinkBlue {
-      0%, 100% { opacity: 0.3; transform: scale(0.8); }
-      50% { opacity: 1; transform: scale(1.2); }
+    .hero .siren::after {
+      left: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0,0,255,0.5), transparent);
+      animation-delay: 1.5s;
+    }
+    @keyframes sirenMove {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(200%); }
+    }
+    .hero .siren .pulse {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,0,0,0.2) 0%, transparent 60%);
+      animation: pulseGlow 2s infinite alternate;
+    }
+    @keyframes pulseGlow {
+      0% { opacity: 0.2; }
+      100% { opacity: 0.6; }
     }
     .hero-content {
       max-width: 800px;
@@ -251,9 +284,22 @@
       z-index: 2;
     }
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(1.8rem, 5vw, 3.5rem);
       margin-bottom: 1rem;
       animation: fadeUp 0.8s ease;
+    }
+    .hero h1 .nowrap {
+      display: inline-block;
+      white-space: nowrap;
+    }
+    @media (max-width: 600px) {
+      .hero h1 .nowrap {
+        display: block;
+        white-space: normal;
+      }
+      .hero h1 br {
+        display: none;
+      }
     }
     .hero p {
       font-size: 1.3rem;
@@ -279,20 +325,25 @@
       border: none;
       cursor: pointer;
       transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+      animation: bounce 2s infinite ease-in-out;
     }
     .btn:hover {
       background: var(--btn-hover);
-      transform: scale(1.03);
+      transform: scale(1.05);
       box-shadow: 0 10px 20px rgba(0,0,0,0.15);
     }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
     .btn-outline {
-      background: transparent;
+      background: var(--btn-bg);
       border: 2px solid white;
-      color: white;
+      color: var(--btn-text);
     }
     .btn-outline:hover {
-      background: white;
-      color: #004e9a;
+      background: var(--btn-hover);
+      color: var(--btn-text);
     }
     @keyframes fadeUp {
       0% { opacity: 0; transform: translateY(30px); }
@@ -376,22 +427,23 @@
 
     @media (max-width: 768px) {
       section { padding: 60px 0; }
-      .hero h1 { font-size: 2.2rem; }
+      .hero h1 { font-size: 2rem; }
     }
   </style>
 </head>
 <body>
   <header>
     <div class="container header-inner">
-      <div class="logo">Скорая страховая <span class="red-text">при ДТП</span></div>
+      <div class="logo">Скорая Страховая Помощь при ДТП</div>
       <button class="burger-btn" id="openMenuBtn"><i class="fas fa-bars"></i></button>
     </div>
+    <div class="header-line"></div>
   </header>
 
   <div class="menu-overlay" id="menuOverlay">
     <div class="menu-panel">
       <div class="menu-header">
-        <span class="menu-logo">Скорая страховая <span class="red-text">при ДТП</span></span>
+        <span class="menu-logo">Скорая Страховая</span>
         <button class="close-btn" id="closeMenuBtn"><i class="fas fa-times"></i></button>
       </div>
       <nav class="menu-nav">
@@ -410,8 +462,15 @@
 
   <main>
     <section id="home" class="hero">
+      <div class="siren">
+        <div class="pulse"></div>
+      </div>
       <div class="container hero-content">
-        <h1>Служба аварийных комиссаров «Скорая страховая помощь» во Владивостоке</h1>
+        <h1>
+          <span class="nowrap">Служба аварийных комиссаров</span><br class="mobile-br">
+          <span class="nowrap">«Скорая страховая помощь»</span><br>
+          <span class="nowrap">во Владивостоке</span>
+        </h1>
         <p>Работаем круглосуточно, приедем на место ДТП за 15 минут</p>
         <div class="hero-buttons">
           <a href="tel:+79673888889" class="btn"><i class="fas fa-phone-alt"></i> +7 967 388‑88‑89</a>
@@ -518,4 +577,4 @@
     })();
   </script>
 </body>
-</html>
+        </html>
